@@ -1,502 +1,1327 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Local Commerce Platform</title>
+<title>Local Commerce</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,Arial,sans-serif;
+}
+
+body{
+    background:#f7f8fc;
+    color:#172033;
+}
+
+/* HEADER */
+
+header{
+    height:72px;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    border-bottom:1px solid #edf0f5;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:22px;
+    font-weight:800;
+    color:#2563eb;
+}
+
+.logo-icon{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.location{
+    border:1px solid #e5e7eb;
+    padding:9px 13px;
+    border-radius:10px;
+    background:white;
+    cursor:pointer;
+}
+
+.language{
+    border:1px solid #e5e7eb;
+    padding:9px 10px;
+    border-radius:10px;
+    background:white;
+    cursor:pointer;
+}
+
+.login-btn{
+    background:#2563eb;
+    color:white;
+    border:0;
+    padding:11px 18px;
+    border-radius:10px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.cart-btn{
+    position:relative;
+    background:#f1f5ff;
+    border:0;
+    width:42px;
+    height:42px;
+    border-radius:11px;
+    cursor:pointer;
+    font-size:19px;
+}
+
+.cart-count{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    background:#ef4444;
+    color:white;
+    width:19px;
+    height:19px;
+    border-radius:50%;
+    font-size:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* HERO */
+
+.hero{
+    padding:70px 6% 80px;
+    background:
+    radial-gradient(circle at 10% 20%,rgba(255,255,255,.15),transparent 30%),
+    linear-gradient(135deg,#1d4ed8,#4338ca);
+    color:white;
+    text-align:center;
+}
+
+.badge{
+    display:inline-block;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.2);
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:46px;
+    line-height:1.15;
+    max-width:850px;
+    margin:auto;
+    font-weight:850;
+}
+
+.hero p{
+    margin:18px auto 28px;
+    max-width:650px;
+    font-size:17px;
+    opacity:.92;
+}
+
+.search-box{
+    max-width:720px;
+    margin:auto;
+    background:white;
+    padding:6px;
+    border-radius:15px;
+    display:flex;
+    box-shadow:0 15px 40px rgba(0,0,0,.18);
+}
+
+.search-box input{
+    flex:1;
+    border:0;
+    outline:0;
+    padding:15px;
+    font-size:15px;
+    color:#111827;
+}
+
+.search-box button{
+    border:0;
+    background:#111827;
+    color:white;
+    padding:0 25px;
+    border-radius:11px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+/* SECTIONS */
+
+.section{
+    padding:45px 6%;
+}
+
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+}
+
+.section h2{
+    font-size:25px;
+}
+
+.view-all{
+    color:#2563eb;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* CATEGORIES */
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:16px;
+}
+
+.category{
+    background:white;
+    border:1px solid #edf0f5;
+    border-radius:18px;
+    padding:25px 12px;
+    text-align:center;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.category:hover{
+    transform:translateY(-5px);
+    border-color:#c7d2fe;
+    box-shadow:0 12px 30px rgba(37,99,235,.09);
+}
+
+.category-icon{
+    width:58px;
+    height:58px;
+    margin:auto auto 13px;
+    border-radius:16px;
+    background:#eef2ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+}
+
+.category h3{
+    font-size:14px;
+}
+
+/* PRODUCTS */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.product{
+    background:white;
+    border:1px solid #edf0f5;
+    border-radius:18px;
+    overflow:hidden;
+    transition:.25s;
+}
+
+.product:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+.product-image{
+    height:190px;
+    background:#f3f5ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:70px;
+}
+
+.product-content{
+    padding:17px;
+}
+
+.shop-name{
+    font-size:12px;
+    color:#64748b;
+    margin-bottom:6px;
+}
+
+.product h3{
+    font-size:17px;
+    margin-bottom:7px;
+}
+
+.product-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:14px;
+}
+
+.price{
+    font-size:19px;
+    font-weight:800;
+    color:#111827;
+}
+
+.add-btn{
+    background:#2563eb;
+    color:white;
+    border:0;
+    padding:9px 14px;
+    border-radius:9px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* FEATURES */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.feature{
+    background:white;
+    border:1px solid #edf0f5;
+    padding:25px;
+    border-radius:17px;
+}
+
+.feature-icon{
+    font-size:28px;
+    margin-bottom:13px;
+}
+
+.feature h3{
+    margin-bottom:8px;
+}
+
+.feature p{
+    color:#64748b;
+    line-height:1.6;
+    font-size:14px;
+}
+
+/* FOOTER */
+
+footer{
+    margin-top:30px;
+    background:#111827;
+    color:white;
+    padding:45px 6%;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:30px;
+}
+
+footer h3{
+    margin-bottom:12px;
+}
+
+footer p{
+    color:#9ca3af;
+    line-height:1.7;
+}
+
+.footer-bottom{
+    margin-top:30px;
+    padding-top:20px;
+    border-top:1px solid #293241;
+    text-align:center;
+    color:#9ca3af;
+    font-size:13px;
+}
+
+/* CART DRAWER */
+
+.cart-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.4);
+    z-index:2000;
+}
+
+.cart{
+    position:absolute;
+    right:0;
+    top:0;
+    width:380px;
+    max-width:90%;
+    height:100%;
+    background:white;
+    padding:25px;
+    box-shadow:-10px 0 30px rgba(0,0,0,.15);
+}
+
+.cart-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.close-cart{
+    border:0;
+    background:#f1f5f9;
+    width:35px;
+    height:35px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.cart-items{
+    color:#64748b;
+}
+
+.cart-total{
+    position:absolute;
+    bottom:25px;
+    left:25px;
+    right:25px;
+}
+
+.checkout{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:11px;
+    background:#2563eb;
+    color:white;
+    font-weight:800;
+    margin-top:12px;
+    cursor:pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .categories{
+        grid-template-columns:repeat(3,1fr);
     }
 
-    body {
-      background: #f5f7fb;
-      color: #222;
+    .products{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    /* HEADER */
-    header {
-      background: #ffffff;
-      padding: 15px 5%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    .features{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
-      color: #2563eb;
+    .hero h1{
+        font-size:36px;
     }
 
-    .login-btn {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
+    .location{
+        display:none;
+    }
+}
+
+@media(max-width:600px){
+
+    header{
+        padding:0 4%;
     }
 
-    /* HERO */
-    .hero {
-      padding: 45px 5%;
-      background: linear-gradient(135deg, #2563eb, #4f46e5);
-      color: white;
-      text-align: center;
+    .logo span{
+        display:none;
     }
 
-    .hero h1 {
-      font-size: 34px;
-      margin-bottom: 12px;
+    .language{
+        padding:8px;
     }
 
-    .hero p {
-      font-size: 17px;
-      margin-bottom: 25px;
+    .login-btn{
+        padding:9px 12px;
+        font-size:12px;
     }
 
-    .search-box {
-      max-width: 650px;
-      margin: auto;
-      display: flex;
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
+    .hero{
+        padding:50px 5% 60px;
     }
 
-    .search-box input {
-      flex: 1;
-      border: none;
-      padding: 16px;
-      outline: none;
-      font-size: 16px;
+    .hero h1{
+        font-size:29px;
     }
 
-    .search-box button {
-      border: none;
-      background: #111827;
-      color: white;
-      padding: 0 22px;
-      cursor: pointer;
+    .hero p{
+        font-size:14px;
     }
 
-    /* CATEGORIES */
-    .section {
-      padding: 35px 5%;
+    .search-box{
+        flex-direction:row;
     }
 
-    .section h2 {
-      margin-bottom: 20px;
+    .search-box button{
+        padding:0 16px;
     }
 
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
+    .section{
+        padding:35px 5%;
     }
 
-    .category {
-      background: white;
-      padding: 25px 15px;
-      border-radius: 14px;
-      text-align: center;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.06);
-      cursor: pointer;
-      transition: 0.2s;
+    .categories{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .category:hover {
-      transform: translateY(-4px);
+    .products{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
     }
 
-    .category .icon {
-      font-size: 35px;
-      margin-bottom: 10px;
+    .product-image{
+        height:130px;
+        font-size:50px;
     }
 
-    .category h3 {
-      font-size: 16px;
+    .product-content{
+        padding:12px;
     }
 
-    /* PRODUCTS */
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 18px;
+    .product h3{
+        font-size:14px;
     }
 
-    .product {
-      background: white;
-      border-radius: 14px;
-      padding: 15px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+    .price{
+        font-size:16px;
     }
 
-    .product-image {
-      height: 140px;
-      background: #eef2ff;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 55px;
-      margin-bottom: 12px;
+    .add-btn{
+        padding:7px 9px;
+        font-size:11px;
     }
 
-    .product h3 {
-      margin-bottom: 6px;
+    .features{
+        grid-template-columns:1fr;
     }
 
-    .price {
-      font-size: 19px;
-      font-weight: bold;
-      color: #16a34a;
-      margin-bottom: 12px;
+    .footer-grid{
+        grid-template-columns:1fr;
     }
 
-    .add-btn {
-      width: 100%;
-      padding: 10px;
-      background: #2563eb;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
+    .section-header h2{
+        font-size:20px;
     }
-
-    /* FEATURES */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-    }
-
-    .feature {
-      background: white;
-      padding: 22px;
-      border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.05);
-    }
-
-    .feature h3 {
-      margin-bottom: 8px;
-    }
-
-    /* FOOTER */
-    footer {
-      margin-top: 30px;
-      padding: 30px 5%;
-      background: #111827;
-      color: white;
-      text-align: center;
-    }
-
-    /* MOBILE */
-    @media(max-width:600px) {
-
-      .hero h1 {
-        font-size: 27px;
-      }
-
-      .hero p {
-        font-size: 15px;
-      }
-
-      .search-box {
-        flex-direction: column;
-      }
-
-      .search-box button {
-        padding: 13px;
-      }
-
-      header {
-        padding: 12px 4%;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header>
+<!-- HEADER -->
+
+<header>
 
     <div class="logo">
-      Local Commerce
+        <div class="logo-icon">🛍️</div>
+        <span>Local Commerce</span>
     </div>
 
-    <button class="login-btn" onclick="login()">
-      Login / Register
-    </button>
+    <div class="header-right">
 
-  </header>
+        <button class="location" onclick="chooseLocation()">
+            📍 <span id="locationText">Tarakeswar</span>
+        </button>
+
+        <select class="language" id="languageSelect" onchange="changeLanguage()">
+            <option value="bn">বাংলা</option>
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+        </select>
+
+        <button class="cart-btn" onclick="openCart()">
+            🛒
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+
+        <button class="login-btn" onclick="login()" id="loginBtn">
+            Login / Register
+        </button>
+
+    </div>
+
+</header>
 
 
-  <!-- HERO -->
-  <section class="hero">
+<!-- HERO -->
 
-    <h1>আপনার এলাকার সবকিছু, এক App-এ</h1>
+<section class="hero">
 
-    <p>
-      Local shops থেকে সহজে পণ্য খুঁজুন, অর্ডার করুন এবং Delivery নিন।
+    <div class="badge" id="badge">
+        🏪 Your Local Marketplace
+    </div>
+
+    <h1 id="heroTitle">
+        আপনার এলাকার সবকিছু, এক App-এ
+    </h1>
+
+    <p id="heroText">
+        কাছাকাছি দোকান থেকে পণ্য খুঁজুন, অর্ডার করুন এবং দ্রুত Delivery নিন।
     </p>
 
     <div class="search-box">
 
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="আপনি কী খুঁজছেন?"
-      >
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="আপনি কী খুঁজছেন?"
+        >
 
-      <button onclick="searchProduct()">
-        Search
-      </button>
+        <button onclick="searchProduct()" id="searchBtn">
+            Search
+        </button>
 
     </div>
 
-  </section>
+</section>
 
 
-  <!-- CATEGORIES -->
-  <section class="section">
+<!-- CATEGORIES -->
 
-    <h2>Shop by Category</h2>
+<section class="section">
+
+    <div class="section-header">
+        <h2 id="categoryTitle">Shop by Category</h2>
+        <span class="view-all" onclick="showAllCategories()" id="viewAll">
+            View All
+        </span>
+    </div>
 
     <div class="categories">
 
-      <div class="category" onclick="selectCategory('Kirana')">
-        <div class="icon">🛒</div>
-        <h3>Kirana</h3>
-      </div>
+        <div class="category" onclick="selectCategory('Kirana')">
+            <div class="category-icon">🛒</div>
+            <h3 id="cat1">Kirana</h3>
+        </div>
 
-      <div class="category" onclick="selectCategory('Restaurant')">
-        <div class="icon">🍔</div>
-        <h3>Restaurant</h3>
-      </div>
+        <div class="category" onclick="selectCategory('Restaurant')">
+            <div class="category-icon">🍔</div>
+            <h3 id="cat2">Restaurant</h3>
+        </div>
 
-      <div class="category" onclick="selectCategory('Medicine')">
-        <div class="icon">💊</div>
-        <h3>Medicine</h3>
-      </div>
+        <div class="category" onclick="selectCategory('Medicine')">
+            <div class="category-icon">💊</div>
+            <h3 id="cat3">Medicine</h3>
+        </div>
 
-      <div class="category" onclick="selectCategory('Print')">
-        <div class="icon">🖨️</div>
-        <h3>Print / Xerox</h3>
-      </div>
+        <div class="category" onclick="selectCategory('Print')">
+            <div class="category-icon">🖨️</div>
+            <h3 id="cat4">Print / Xerox</h3>
+        </div>
+
+        <div class="category" onclick="selectCategory('Fashion')">
+            <div class="category-icon">👕</div>
+            <h3 id="cat5">Fashion</h3>
+        </div>
+
+        <div class="category" onclick="selectCategory('Electronics')">
+            <div class="category-icon">📱</div>
+            <h3 id="cat6">Electronics</h3>
+        </div>
 
     </div>
 
-  </section>
+</section>
 
 
-  <!-- PRODUCTS -->
-  <section class="section">
+<!-- PRODUCTS -->
 
-    <h2>Popular Near You</h2>
+<section class="section">
+
+    <div class="section-header">
+        <h2 id="popularTitle">Popular Near You</h2>
+        <span class="view-all" onclick="showProducts()" id="productsView">
+            View All
+        </span>
+    </div>
 
     <div class="products">
 
-      <div class="product">
+        <div class="product">
 
-        <div class="product-image">
-          🥛
+            <div class="product-image">🥛</div>
+
+            <div class="product-content">
+
+                <div class="shop-name">Fresh Mart • 0.5 km</div>
+
+                <h3 id="product1">Fresh Milk</h3>
+
+                <div class="product-bottom">
+
+                    <div class="price">₹30</div>
+
+                    <button class="add-btn"
+                        onclick="addToCart('Fresh Milk',30)">
+                        + Add
+                    </button>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <h3>Milk</h3>
 
-        <div class="price">
-          ₹30
+        <div class="product">
+
+            <div class="product-image">🍚</div>
+
+            <div class="product-content">
+
+                <div class="shop-name">Maa Store • 0.8 km</div>
+
+                <h3 id="product2">Rice</h3>
+
+                <div class="product-bottom">
+
+                    <div class="price">₹60</div>
+
+                    <button class="add-btn"
+                        onclick="addToCart('Rice',60)">
+                        + Add
+                    </button>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <button class="add-btn" onclick="addToCart('Milk',30)">
-          Add to Cart
-        </button>
 
-      </div>
+        <div class="product">
 
+            <div class="product-image">🥚</div>
 
-      <div class="product">
+            <div class="product-content">
 
-        <div class="product-image">
-          🍚
+                <div class="shop-name">Daily Needs • 1.1 km</div>
+
+                <h3 id="product3">Egg</h3>
+
+                <div class="product-bottom">
+
+                    <div class="price">₹7</div>
+
+                    <button class="add-btn"
+                        onclick="addToCart('Egg',7)">
+                        + Add
+                    </button>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <h3>Rice</h3>
 
-        <div class="price">
-          ₹60
+        <div class="product">
+
+            <div class="product-image">🍪</div>
+
+            <div class="product-content">
+
+                <div class="shop-name">New Market • 1.4 km</div>
+
+                <h3 id="product4">Biscuits</h3>
+
+                <div class="product-bottom">
+
+                    <div class="price">₹20</div>
+
+                    <button class="add-btn"
+                        onclick="addToCart('Biscuits',20)">
+                        + Add
+                    </button>
+
+                </div>
+
+            </div>
+
         </div>
-
-        <button class="add-btn" onclick="addToCart('Rice',60)">
-          Add to Cart
-        </button>
-
-      </div>
-
-
-      <div class="product">
-
-        <div class="product-image">
-          🥚
-        </div>
-
-        <h3>Egg</h3>
-
-        <div class="price">
-          ₹7
-        </div>
-
-        <button class="add-btn" onclick="addToCart('Egg',7)">
-          Add to Cart
-        </button>
-
-      </div>
-
-
-      <div class="product">
-
-        <div class="product-image">
-          🍪
-        </div>
-
-        <h3>Biscuits</h3>
-
-        <div class="price">
-          ₹20
-        </div>
-
-        <button class="add-btn" onclick="addToCart('Biscuits',20)">
-          Add to Cart
-        </button>
-
-      </div>
 
     </div>
 
-  </section>
+</section>
 
 
-  <!-- FEATURES -->
-  <section class="section">
+<!-- FEATURES -->
 
-    <h2>Why Local Commerce?</h2>
+<section class="section">
+
+    <div class="section-header">
+        <h2 id="whyTitle">Why Local Commerce?</h2>
+    </div>
 
     <div class="features">
 
-      <div class="feature">
-        <h3>📍 Nearby Shops</h3>
-        <p>
-          আপনার কাছাকাছি দোকান থেকে পণ্য অর্ডার করুন।
-        </p>
-      </div>
+        <div class="feature">
+            <div class="feature-icon">📍</div>
+            <h3 id="feature1Title">Nearby Shops</h3>
+            <p id="feature1Text">
+                আপনার কাছাকাছি দোকান থেকে সহজে পণ্য অর্ডার করুন।
+            </p>
+        </div>
 
-      <div class="feature">
-        <h3>🚴 Fast Delivery</h3>
-        <p>
-          Local delivery partners-এর মাধ্যমে দ্রুত delivery।
-        </p>
-      </div>
+        <div class="feature">
+            <div class="feature-icon">🚴</div>
+            <h3 id="feature2Title">Fast Delivery</h3>
+            <p id="feature2Text">
+                Local delivery partners-এর মাধ্যমে দ্রুত Delivery পান।
+            </p>
+        </div>
 
-      <div class="feature">
-        <h3>🔐 Secure</h3>
-        <p>
-          OTP based authentication এবং secure account system।
-        </p>
-      </div>
+        <div class="feature">
+            <div class="feature-icon">🔐</div>
+            <h3 id="feature3Title">Secure</h3>
+            <p id="feature3Text">
+                OTP based authentication এবং secure account system।
+            </p>
+        </div>
 
-      <div class="feature">
-        <h3>🏪 Local Business</h3>
-        <p>
-          Local দোকানগুলিকে online business করার সুযোগ।
-        </p>
-      </div>
+        <div class="feature">
+            <div class="feature-icon">🏪</div>
+            <h3 id="feature4Title">Support Local</h3>
+            <p id="feature4Text">
+                Local দোকানগুলিকে online business করার সুযোগ দিন।
+            </p>
+        </div>
 
     </div>
 
-  </section>
+</section>
 
 
-  <!-- FOOTER -->
-  <footer>
+<!-- FOOTER -->
 
-    <h3>Local Commerce Platform</h3>
+<footer>
 
-    <p>
-      Shop Local • Support Local • Grow Local
-    </p>
+    <div class="footer-grid">
 
-    <p>
-      © 2026 Local Commerce Platform
-    </p>
+        <div>
+            <h3>🛍️ Local Commerce</h3>
+            <p id="footerText">
+                আপনার এলাকার trusted local marketplace।
+            </p>
+        </div>
 
-  </footer>
+        <div>
+            <h3 id="footerShop">Shop</h3>
+            <p>Kirana</p>
+            <p>Restaurant</p>
+            <p>Medicine</p>
+        </div>
+
+        <div>
+            <h3 id="footerBusiness">For Business</h3>
+            <p id="joinShop">Join as a Shop</p>
+            <p id="deliveryPartner">Delivery Partner</p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Local Commerce Platform • Shop Local • Support Local
+    </div>
+
+</footer>
 
 
-  <!-- JAVASCRIPT -->
-  <script>
+<!-- CART -->
 
-    function login() {
+<div class="cart-overlay" id="cartOverlay">
 
-      alert(
-        "Login / Registration system খুব শীঘ্রই চালু হবে।"
-      );
+    <div class="cart">
+
+        <div class="cart-header">
+
+            <h2 id="cartTitle">Your Cart</h2>
+
+            <button class="close-cart" onclick="closeCart()">
+                ✕
+            </button>
+
+        </div>
+
+        <div class="cart-items" id="cartItems">
+            Your cart is empty.
+        </div>
+
+        <div class="cart-total">
+
+            <h3>
+                Total:
+                <span id="cartTotal">₹0</span>
+            </h3>
+
+            <button class="checkout" onclick="checkout()">
+                Proceed to Checkout
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let cart = [];
+
+const translations = {
+
+    bn: {
+
+        badge:"🏪 আপনার এলাকার Local Marketplace",
+
+        heroTitle:"আপনার এলাকার সবকিছু, এক App-এ",
+
+        heroText:"কাছাকাছি দোকান থেকে পণ্য খুঁজুন, অর্ডার করুন এবং দ্রুত Delivery নিন।",
+
+        placeholder:"আপনি কী খুঁজছেন?",
+
+        search:"খুঁজুন",
+
+        categoryTitle:"ক্যাটাগরি অনুযায়ী Shop করুন",
+
+        viewAll:"সব দেখুন",
+
+        popularTitle:"আপনার কাছাকাছি জনপ্রিয়",
+
+        cat1:"মুদি দোকান",
+        cat2:"রেস্টুরেন্ট",
+        cat3:"ওষুধ",
+        cat4:"প্রিন্ট / জেরক্স",
+        cat5:"ফ্যাশন",
+        cat6:"ইলেকট্রনিক্স",
+
+        product1:"Fresh Milk",
+        product2:"চাল",
+        product3:"ডিম",
+        product4:"বিস্কুট",
+
+        whyTitle:"কেন Local Commerce?",
+
+        feature1Title:"কাছাকাছি দোকান",
+        feature1Text:"আপনার কাছাকাছি দোকান থেকে সহজে পণ্য অর্ডার করুন।",
+
+        feature2Title:"দ্রুত Delivery",
+        feature2Text:"Local delivery partners-এর মাধ্যমে দ্রুত Delivery পান।",
+
+        feature3Title:"নিরাপদ",
+        feature3Text:"OTP based authentication এবং secure account system।",
+
+        feature4Title:"Local Business",
+        feature4Text:"স্থানীয় দোকানগুলিকে online business করার সুযোগ দিন।",
+
+        footerText:"আপনার এলাকার trusted local marketplace।",
+
+        footerShop:"Shop",
+        footerBusiness:"Business",
+        joinShop:"Shop হিসেবে যোগ দিন",
+        deliveryPartner:"Delivery Partner",
+
+        login:"Login / Register",
+
+        cartTitle:"আপনার Cart",
+
+        emptyCart:"আপনার Cart খালি।",
+
+        checkout:"Checkout করুন"
+
+    },
+
+    en: {
+
+        badge:"🏪 Your Local Marketplace",
+
+        heroTitle:"Everything Around You, In One App",
+
+        heroText:"Discover nearby shops, order products and get fast local delivery.",
+
+        placeholder:"What are you looking for?",
+
+        search:"Search",
+
+        categoryTitle:"Shop by Category",
+
+        viewAll:"View All",
+
+        popularTitle:"Popular Near You",
+
+        cat1:"Kirana",
+        cat2:"Restaurant",
+        cat3:"Medicine",
+        cat4:"Print / Xerox",
+        cat5:"Fashion",
+        cat6:"Electronics",
+
+        product1:"Fresh Milk",
+        product2:"Rice",
+        product3:"Egg",
+        product4:"Biscuits",
+
+        whyTitle:"Why Local Commerce?",
+
+        feature1Title:"Nearby Shops",
+        feature1Text:"Order products from trusted shops near you.",
+
+        feature2Title:"Fast Delivery",
+        feature2Text:"Get quick delivery through local delivery partners.",
+
+        feature3Title:"Secure",
+        feature3Text:"OTP based authentication and secure account system.",
+
+        feature4Title:"Support Local",
+        feature4Text:"Help local shops grow their online business.",
+
+        footerText:"Your trusted local marketplace.",
+
+        footerShop:"Shop",
+        footerBusiness:"For Business",
+        joinShop:"Join as a Shop",
+        deliveryPartner:"Delivery Partner",
+
+        login:"Login / Register",
+
+        cartTitle:"Your Cart",
+
+        emptyCart:"Your cart is empty.",
+
+        checkout:"Proceed to Checkout"
+
+    },
+
+    hi: {
+
+        badge:"🏪 आपका Local Marketplace",
+
+        heroTitle:"आपके आसपास की हर चीज़, एक App में",
+
+        heroText:"पास की दुकानों से सामान खोजें, ऑर्डर करें और तेज़ Delivery पाएं।",
+
+        placeholder:"आप क्या ढूंढ रहे हैं?",
+
+        search:"खोजें",
+
+        categoryTitle:"Category के अनुसार Shop करें",
+
+        viewAll:"सभी देखें",
+
+        popularTitle:"आपके पास लोकप्रिय",
+
+        cat1:"किराना",
+        cat2:"रेस्टोरेंट",
+        cat3:"दवाई",
+        cat4:"प्रिंट / ज़ेरॉक्स",
+        cat5:"फैशन",
+        cat6:"इलेक्ट्रॉनिक्स",
+
+        product1:"Fresh Milk",
+        product2:"चावल",
+        product3:"अंडा",
+        product4:"बिस्कुट",
+
+        whyTitle:"Local Commerce क्यों?",
+
+        feature1Title:"पास की दुकानें",
+        feature1Text:"अपने पास की trusted दुकानों से आसानी से सामान ऑर्डर करें।",
+
+        feature2Title:"Fast Delivery",
+        feature2Text:"Local delivery partners के माध्यम से तेज़ Delivery पाएं।",
+
+        feature3Title:"सुरक्षित",
+        feature3Text:"OTP based authentication और secure account system।",
+
+        feature4Title:"Support Local",
+        feature4Text:"Local दुकानों को online business बढ़ाने में मदद करें।",
+
+        footerText:"आपका trusted local marketplace।",
+
+        footerShop:"Shop",
+        footerBusiness:"Business के लिए",
+        joinShop:"Shop के रूप में जुड़ें",
+        deliveryPartner:"Delivery Partner",
+
+        login:"Login / Register",
+
+        cartTitle:"आपका Cart",
+
+        emptyCart:"आपका Cart खाली है।",
+
+        checkout:"Checkout करें"
 
     }
 
+};
 
-    function searchProduct() {
 
-      const search =
-        document.getElementById("searchInput").value;
+function changeLanguage(){
 
-      if (search.trim() === "") {
+    const lang =
+        document.getElementById("languageSelect").value;
 
-        alert("কী খুঁজছেন লিখুন।");
+    const t = translations[lang];
+
+    document.getElementById("badge").innerText=t.badge;
+    document.getElementById("heroTitle").innerText=t.heroTitle;
+    document.getElementById("heroText").innerText=t.heroText;
+
+    document.getElementById("searchInput").placeholder=t.placeholder;
+    document.getElementById("searchBtn").innerText=t.search;
+
+    document.getElementById("categoryTitle").innerText=t.categoryTitle;
+    document.getElementById("viewAll").innerText=t.viewAll;
+
+    document.getElementById("popularTitle").innerText=t.popularTitle;
+    document.getElementById("productsView").innerText=t.viewAll;
+
+    document.getElementById("cat1").innerText=t.cat1;
+    document.getElementById("cat2").innerText=t.cat2;
+    document.getElementById("cat3").innerText=t.cat3;
+    document.getElementById("cat4").innerText=t.cat4;
+    document.getElementById("cat5").innerText=t.cat5;
+    document.getElementById("cat6").innerText=t.cat6;
+
+    document.getElementById("product1").innerText=t.product1;
+    document.getElementById("product2").innerText=t.product2;
+    document.getElementById("product3").innerText=t.product3;
+    document.getElementById("product4").innerText=t.product4;
+
+    document.getElementById("whyTitle").innerText=t.whyTitle;
+
+    document.getElementById("feature1Title").innerText=t.feature1Title;
+    document.getElementById("feature1Text").innerText=t.feature1Text;
+
+    document.getElementById("feature2Title").innerText=t.feature2Title;
+    document.getElementById("feature2Text").innerText=t.feature2Text;
+
+    document.getElementById("feature3Title").innerText=t.feature3Title;
+    document.getElementById("feature3Text").innerText=t.feature3Text;
+
+    document.getElementById("feature4Title").innerText=t.feature4Title;
+    document.getElementById("feature4Text").innerText=t.feature4Text;
+
+    document.getElementById("footerText").innerText=t.footerText;
+    document.getElementById("footerShop").innerText=t.footerShop;
+    document.getElementById("footerBusiness").innerText=t.footerBusiness;
+    document.getElementById("joinShop").innerText=t.joinShop;
+    document.getElementById("deliveryPartner").innerText=t.deliveryPartner;
+
+    document.getElementById("loginBtn").innerText=t.login;
+
+    document.getElementById("cartTitle").innerText=t.cartTitle;
+
+    renderCart();
+
+}
+
+
+function login(){
+
+    alert("Login / Registration system will be connected soon.");
+
+}
+
+
+function searchProduct(){
+
+    const search =
+        document.getElementById("searchInput").value.trim();
+
+    if(!search){
+
+        alert("Please enter what you are looking for.");
 
         return;
 
-      }
+    }
 
-      alert(
-        "Searching for: " + search
-      );
+    alert("Searching for: " + search);
+
+}
+
+
+function selectCategory(category){
+
+    alert("Selected Category: " + category);
+
+}
+
+
+function showAllCategories(){
+
+    alert("All categories will be available here.");
+
+}
+
+
+function showProducts(){
+
+    alert("All products will be available here.");
+
+}
+
+
+function chooseLocation(){
+
+    const location =
+        prompt("Enter your location:");
+
+    if(location){
+
+        document.getElementById("locationText").innerText=location;
 
     }
 
+}
 
-    function selectCategory(category) {
 
-      alert(
-        "Selected Category: " + category
-      );
+function addToCart(product,price){
+
+    cart.push({
+        name:product,
+        price:price
+    });
+
+    document.getElementById("cartCount").innerText=cart.length;
+
+    renderCart();
+
+    openCart();
+
+}
+
+
+function renderCart(){
+
+    const container =
+        document.getElementById("cartItems");
+
+    const lang =
+        document.getElementById("languageSelect").value;
+
+    const t=translations[lang];
+
+    if(cart.length===0){
+
+        container.innerText=t.emptyCart;
+
+        document.getElementById("cartTotal").innerText="₹0";
+
+        return;
 
     }
 
+    let total=0;
 
-    function addToCart(product, price) {
+    container.innerHTML="";
 
-      alert(
-        product +
-        " cart-এ যোগ হয়েছে। Price: ₹" +
-        price
-      );
+    cart.forEach((item,index)=>{
+
+        total += item.price;
+
+        const row=document.createElement("div");
+
+        row.style.display="flex";
+        row.style.justifyContent="space-between";
+        row.style.padding="12px 0";
+        row.style.borderBottom="1px solid #eee";
+
+        row.innerHTML=`
+
+            <span>
+                ${item.name}
+            </span>
+
+            <strong>
+                ₹${item.price}
+            </strong>
+
+        `;
+
+        container.appendChild(row);
+
+    });
+
+    document.getElementById("cartTotal").innerText="₹"+total;
+
+}
+
+
+function openCart(){
+
+    document.getElementById("cartOverlay").style.display="block";
+
+}
+
+
+function closeCart(){
+
+    document.getElementById("cartOverlay").style.display="none";
+
+}
+
+
+function checkout(){
+
+    if(cart.length===0){
+
+        alert("Your cart is empty.");
+
+        return;
 
     }
 
-  </script>
+    alert(
+        "Checkout system will be connected with payment & delivery."
+    );
+
+}
+
+</script>
 
 </body>
 </html>
